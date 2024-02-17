@@ -1,0 +1,61 @@
+Додай до коду видалення студента зі списку
+
+
+students_performance = {
+    1: [
+        {
+            "прізвище": "Кирилов Володимир",
+            "курс": 2,
+            "предмети": {"Математика": 90, "Фізика": 85, "Історія": 75}
+        },
+        {
+            "прізвище": "Сокол Анастасія",
+            "курс": 2,
+            "предмети": {"Математика": 95, "Фізика": 80, "Історія": 70}
+        }
+    ]
+}
+
+
+def add_student():
+    group_number = int(input("Введіть номер групи студента: "))
+    full_name = input("Введіть прізвище, ім'я та по батькові студента: ")
+    course = int(input("Введіть курс студента: "))
+
+    # Введення даних про предмети та оцінки за семестр
+    subjects_grades = {}
+    while True:
+        subject = input("Введіть назву предмету або 'кінець', щоб завершити: ")
+        if subject == 'кінець':
+            break
+        grade = int(input(f"Введіть оцінку за предмет '{subject}': "))
+        subjects_grades[subject] = grade
+
+    # Додавання даних про студента до словника
+    if group_number not in students_performance:
+        students_performance[group_number] = []
+    students_performance[group_number].append({
+        "прізвище": full_name,
+        "курс": course,
+        "предмети": subjects_grades
+    })
+    print("Дані про студента додано успішно.")
+
+    # Вивід інформації про всіх студентів
+    print("\nІнформація про всіх студентів:")
+    for group_number, students in students_performance.items():
+        print(f"Група {group_number}:")
+        for student in students:
+            print(
+                f"Прізвище: {student['прізвище']}, Курс: {student['курс']}, Предмети та оцінки: {student['предмети']}")
+
+
+# Вивід інформації про всіх студентів перед додаванням нових
+print("Інформація про всіх студентів:")
+for group_number, students in students_performance.items():
+    print(f"Група {group_number}:")
+    for student in students:
+        print(f"Прізвище: {student['прізвище']}, Курс: {student['курс']}, Предмети та оцінки: {student['предмети']}")
+
+# Приклад використання функції для додавання студента
+add_student()
